@@ -1,6 +1,8 @@
 
 import { lazy , Suspense} from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Loading from "./Components/Loading";
+import Header from "./Components/Header";
 
 const  Home=lazy(()=>import("./Pages/Home"));
 const Search=lazy(()=>import("./Pages/Search"));
@@ -27,8 +29,9 @@ const TransactionManagement = lazy(
 
 const App = () => {
   return (
-    <Suspense>
-      <Router>
+    <Router>
+      <Header/>
+        <Suspense fallback={<Loading/>}>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/search" element={<Search />}/>
@@ -63,8 +66,8 @@ const App = () => {
 </Route>;
 
         </Routes>
-      </Router>
     </Suspense>  
+      </Router>
   )
 }
 
